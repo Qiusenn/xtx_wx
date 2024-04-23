@@ -8,6 +8,7 @@ import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import XtxGuess from '@/components/XtxGuess.vue'
 import type { XtxGuessInstance } from '@/components/components'
+import PageSkeleton from './components/PageSkeleton.vue'
 
 const bannerList = ref<BannerItem[]>([])
 const categoryList = ref<CategoryItem[]>([])
@@ -15,6 +16,9 @@ const HotList = ref<HotItem[]>([])
 // 下拉刷新状态
 const isTriggered = ref(false)
 const guessRef = ref<XtxGuessInstance>()
+
+// 是否在加载数据
+const isLoading = ref<boolean>(false)
 
 const getHomeBannerData = async () => {
   const data = await getHomeBannerAPI()
@@ -51,10 +55,10 @@ const onScrolltolower = async () => {
   isTriggered.value = false
 }
 
-onLoad(() => {
-  getHomeBannerData()
-  getHomeCategoryData()
-  getHomeHotData()
+onLoad(async () => {
+  isLoading.value = true
+  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()])
+  isLoading.value = false
 })
 </script>
 
@@ -68,10 +72,13 @@ onLoad(() => {
     @scrolltolower="onScrolltolower"
     :refresher-triggered="isTriggered"
   >
-    <XtxSwiper :list="bannerList" />
-    <CategortPanel :list="categoryList" />
-    <HotPanel :list="HotList" />
-    <XtxGuess ref="guessRef" />
+    <PageSkeleton v-if="isLoading" />
+    <template v-else>
+      <XtxSwiper :list="bannerList" />
+      <CategortPanel :list="categoryList" />
+      <HotPanel :list="HotList" />
+      <XtxGuess ref="guessRef" />
+    </template>
   </scroll-view>
 </template>
 
