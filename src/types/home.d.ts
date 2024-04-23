@@ -1,3 +1,4 @@
+import type { GoodsItem } from '@/types/global'
 /** 首页-广告区域数据类型 */
 export type BannerItem = {
   /** 跳转链接 */
