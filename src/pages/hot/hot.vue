@@ -36,7 +36,7 @@ const onScrolltolower = async () => {
   const currentHotItemData = subTypes.value[activeIndex.value]
   const currentHotPageRes = currentHotItemData?.goodsItems
   // 获取当前分页页码
-  const page = currentHotPageRes?.page
+  const page = currentHotPageRes?.page + 1
   // 获取当前分页数
   const pageSize = currentHotPageRes?.pageSize
   // 获取分页的数据id
@@ -54,7 +54,6 @@ const onScrolltolower = async () => {
   })
   const resSubTypes: SubTypeItem = res.result.subTypes[activeIndex.value]
   const currentSubType = subTypes.value[activeIndex.value]
-  currentSubType.goodsItems.page++
   currentSubType.goodsItems.pageSize = resSubTypes.goodsItems.pageSize
   currentSubType.goodsItems.items.push(...resSubTypes.goodsItems.items)
 }
