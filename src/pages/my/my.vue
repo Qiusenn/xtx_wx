@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { useMemberStore } from '@/stores'
+import { http } from '@/utils/http'
 
 const memberStore = useMemberStore()
+
+const request = async () => {
+  const reslt = await http<Object[]>({
+    method: 'GET',
+    url: '/home/banner',
+    header: {},
+  })
+}
 </script>
 
 <template>
@@ -20,6 +29,7 @@ const memberStore = useMemberStore()
       保存用户信息
     </button>
     <button @tap="memberStore.clearProfile()" size="mini" plain type="warn">清理用户信息</button>
+    <button @tap="request" size="mini" plain type="warn">request</button>
   </view>
 </template>
 
