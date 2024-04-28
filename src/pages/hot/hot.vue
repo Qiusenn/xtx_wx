@@ -38,7 +38,7 @@ const onScrolltolower = async () => {
   // 获取当前分页页码
   const page = currentHotPageRes?.page + 1
   // 获取当前分页数
-  const pageSize = currentHotPageRes?.pageSize
+  const pageSize = currentHotPageRes?.pageSizeW
   // 获取分页的数据id
   const hotId = currentHotItemData?.id
   if (page >= currentHotPageRes.pages) {
