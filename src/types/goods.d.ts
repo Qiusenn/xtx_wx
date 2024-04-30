@@ -1,4 +1,5 @@
 import type { GoodsItem } from './global'
+import type { AddressItem } from './address'
 
 /** 商品信息 */
 export type GoodsResult = {

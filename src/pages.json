@@ -21,6 +21,7 @@
 		{
 			"path": "pages/my/my",
 			"style": {
+				"navigationStyle": "custom",
 				"navigationBarTitleText": "我的"
 			}
 		},
@@ -93,5 +94,60 @@
 				"selectedIconPath": "static/tabs/user_selected.png"
 			}
 		]
+	},
+	"subPackages": [
+		{
+			"root": "pagesMember/setting",
+			"pages": [
+				{
+					"path": "setting",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesMember/profile",
+			"pages": [
+				{
+					"path": "profile",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTitleText": "个人信息"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesMember/address",
+			"pages": [
+				{
+					"path": "address",
+					"style": {
+						"navigationBarTitleText": "地址管理"
+					}
+				}
+			]
+		},
+		{
+			"root": "pagesMember/address-form",
+			"pages": [
+				{
+					"path": "address-form",
+					"style": {
+						"navigationBarTitleText": "地址表单"
+					}
+				}
+			]
+		}
+	],
+	"preloadRule": {
+		"pages/my/my": {
+			"network": "all",
+			"packages": [
+				"pagesMember/setting"
+			]
+		}
 	}
 }

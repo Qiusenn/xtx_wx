@@ -7,15 +7,15 @@ import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/
 import { ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import XtxGuess from '@/components/XtxGuess.vue'
-import type { XtxGuessInstance } from '@/components/components'
 import PageSkeleton from './components/PageSkeleton.vue'
+import { useGuessList } from '@/composables'
 
 const bannerList = ref<BannerItem[]>([])
 const categoryList = ref<CategoryItem[]>([])
 const HotList = ref<HotItem[]>([])
 // 下拉刷新状态
 const isTriggered = ref(false)
-const guessRef = ref<XtxGuessInstance>()
+const { guessRef, onScrolltolower } = useGuessList()
 
 // 是否在加载数据
 const isLoading = ref<boolean>(false)
@@ -43,15 +43,6 @@ const onRefresherrefresh = async () => {
   // // 重置猜你喜欢组件数据
   guessRef.value?.resetData() // 加载数据
   await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()]) // 关闭动画
-  isTriggered.value = false
-}
-
-// 滑动到底部获取更多
-const onScrolltolower = async () => {
-  // // 开启动画
-  isTriggered.value = true
-  // // 重置猜你喜欢组件数据
-  guessRef.value?.getMore() // 加载数据
   isTriggered.value = false
 }
 
